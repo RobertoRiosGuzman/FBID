@@ -89,6 +89,7 @@ Corremos el script import_distances, ejecutando el siguiente comando desde el di
 ./resources/import_distances.sh
   ```
 Tras ello nos debe aparecer el siguiente mensaje:
+
 ![image](https://user-images.githubusercontent.com/85503582/141812302-db7ded92-12da-46ee-8a3e-837e89e6a89a.png)
 
 ### Train and Save de the model with PySpark mllib
