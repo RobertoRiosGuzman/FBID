@@ -91,7 +91,7 @@ Corremos el script import_distances, ejecutando el siguiente comando desde el di
 Tras ello nos debe aparecer el siguiente mensaje:
 ![image](https://user-images.githubusercontent.com/85503582/141812302-db7ded92-12da-46ee-8a3e-837e89e6a89a.png)
 
-## Train and Save de the model with PySpark mllib
+### Train and Save de the model with PySpark mllib
 
 Desde el directorio base deberemos realizar los siguientes pasos.
 Enlazar la variable `JAVA_HOME` con el path donde se encuentra la instalación de Java, en nuestro caso:
@@ -114,24 +114,72 @@ Ahora se ejecuta el script `train_spark_mllib_model.py` para entrenar un modelo 
  ![image](https://user-images.githubusercontent.com/85503582/141814555-3a94a63b-d152-46b2-9854-9ebfddd18d0f.png)
  
  
-## Run Flight Predictor
+### Run Flight Predictor
 
-Primero, debemos cambiar el valor base_paht en la clase scala MakePrediction, cambie ese valor para la ruta donde se coloca el repositorio de clonación:
+Primero, debemos cambiar el valor base_paht en la clase scala MakePrediction, cambie ese valor para la ruta donde se haya colocado el repositorio de la práctica:
 
 ![tempsnip](https://user-images.githubusercontent.com/85503582/141818494-1841da23-5218-48fb-8b1e-108774dd8a6e.png)
 
 Ahora correremos el proyecto utilizando el programa intellij:
 
+Con el siguiente comando abritemos la aplicación:
+  ```
+intellij-idea-community
+  ```   
+Corremos nuestro Script de Scala y como veremos se pondra todo en funcionamiento:
 
+![image](https://user-images.githubusercontent.com/85503582/141821969-122e20d5-2970-449a-be2d-55e1ec05ef5a.png)
 
+Ahora unicamente nos queda comprobar si realmente
 
+### Iniciar la aplicación web
+  
+ Primero, debemos enlazar la variable `PROJECT_HOME` con el path donde se encuentra el repositorio base de la prcatica, en nuestro caso:
+   ```
+  export PROJECT_HOME=/home/user/Desktop/practica_big_data_2019
+   ```
+Debemos al directorio "web" el cual es un subdirecctorio dentro de "resources" y ejecutar el Script "predict_flask.py" con los siguientes comandos:
+  ```
+  cd practica_big_data_2019/resources/web
+  python3 predict_flask.py
+  
+ ```
+Ahora vistamos la siguiente dirección http://localhost:5000/flights/delays/predict_kafka y comprobamos que todo funcione correctamente:
+ 
+ ![tempsnip](https://user-images.githubusercontent.com/85503582/141823810-18688529-0310-4bcf-8827-f3bc64d39331.png)
 
   
-Please, note that in order to use spark-submit you first need to compile the code and build a JAR file using sbt. Also, when running the spark-submit command, you have to add at least these two packages with the --packages option:
+### Verifique los registros de predicciones insertados en MongoDB
+ 
+ Para ello corra los siguientes comandos:
+ ```
+   $ mongo
+   > use agile_data_science;
+   >db.flight_delay_classification_response.find();
+  
   ```
-  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2
-     
-  ``` 
-   Be carefull with the packages version because if you are using another version of spark, kafka or mongo you have to choose the correspondent version to your installation. This packages work with Spark 3.1.2, kafka_2.12-3.1.2 and mongo superior to 2.6
+ En nuestro caso se ha obtenido la siguiente salida:
+  
+ ![image](https://user-images.githubusercontent.com/85503582/141827695-92fc8d7a-5b19-473e-af8b-32a37777553a.png)
+
+## Ejecución del job de predicción con Spark Submit en vez de IntelliJ
+  
+Para usar Spark-submit primero se necesitara compilar el código y crear un archivo JAR usando sbt, para ello se ejecutaran los siguientes comandos (desde el directorio base de la práctica):
+ ```
+   cd flight_prediction/
+   sbt compile
+   sbt package
+  
+  ```
+Obteniendo la siguiente salida:
+![image](https://user-images.githubusercontent.com/85503582/141834729-a696954b-05cd-4aab-b7e1-a179b625663f.png)
+
+Finalmente deberemos correr el siguiente comando en el que se incluyen los 2 paquetes mencionados:
+
+ ```
+  /opt/spark/bin/spark-submit --class es.upm.dit.ging.predictor.MakePrediction  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 /home/upm/Desktop/practica_big_data_2019/flight_prediction/target/scala-2.12/flight_prediction_2.12-0.1.jar
+  ```
+![image](https://user-images.githubusercontent.com/85503582/141835445-9d410bbb-f363-4ec2-a9aa-0d359bac1351.png)
+
   
   
