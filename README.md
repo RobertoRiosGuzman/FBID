@@ -131,7 +131,6 @@ Corremos nuestro Script de Scala y como veremos se pondra todo en funcionamiento
 
 ![image](https://user-images.githubusercontent.com/85503582/141821969-122e20d5-2970-449a-be2d-55e1ec05ef5a.png)
 
-Ahora unicamente nos queda comprobar si realmente
 
 ### Iniciar la aplicación web
   
@@ -182,5 +181,13 @@ Finalmente deberemos correr el siguiente comando en el que se incluyen los 2 paq
   ```
 ![image](https://user-images.githubusercontent.com/85503582/141835445-9d410bbb-f363-4ec2-a9aa-0d359bac1351.png)
 
+  
+  
+  
+  
+  
+  
+  
+  
   
   
