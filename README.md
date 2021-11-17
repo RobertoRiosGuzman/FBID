@@ -181,9 +181,37 @@ Finalmente deberemos correr el siguiente comando en el que se incluyen los 2 paq
   ```
 ![image](https://user-images.githubusercontent.com/85503582/141835445-9d410bbb-f363-4ec2-a9aa-0d359bac1351.png)
 
+ ##  Dockerizar cada uno de los servicios que componen la arquitectura completa 
   
-  
-  
+Para el desarrollo de este apartado hemos contenirizado cada uno de los elementos necesarios para el funcionamiento de la práctica, creando un DockerFile par cada uno de ellos:
+
+### Zookerper
+   
+Se ha cogigo la imagen bitnami/zookeeper, la cual por defecto se expone por el puerto 2181 y habilitamos la opción de registro de cualquier elemento anónimo, en este caso, el contenedor Kafka. Dicho dockerfile se puede ver .
+   Para construir la imagen mencionada debemos correr los siguientes comandos:
+ ```
+cd /home/upm/Desktop/dockers/zookeeper
+sudo docker build -t "zookeeper" 
+  ```
+   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+  ```
+docker run -d --name zookeeper \
+--network host \
+zookeeper
+  ```
+
+### Kafka
+
+   Se ha cogido la imagen wurstmeister/kafka, la cual por defeto se expone por el puerto 
+
+### Spark
+
+### Mongodb
+
+### Flask
+
+
+
   
   
   
