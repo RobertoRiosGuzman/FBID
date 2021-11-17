@@ -8,7 +8,7 @@ A continuación se mostrara una lista con los puntos que se han realizado marcad
 - [x] [1pto] Desplegar el escenario completo usando docker-compose
 - [x] [1pto] Desplegar el escenario completo en Google Cloud/AWS
 - [x] [2ptos] Desplegar el escenario completo usando kubernetes
-- [ ] [2ptos]  Entrenar el modelo con Apache Airflow
+- [ ] [2ptos] Entrenar el modelo con Apache Airflow
 
 ## Lograr el funcionamiento de la práctica sin realizar modificaciones
 
@@ -236,9 +236,37 @@ spark
 
 ### Mongodb
 
+Para construir la imagen mencionada debemos correr los siguientes comandos:
+```
+cd /home/upm/Desktop/dockers/mongodb
+sudo docker build -t "mongodb" .
+  ```
+   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+  ```
+docker run  -d --name mongodb \
+--network host \
+mongodb 
+  ```
+
 ### Flask
 
+Para construir la imagen mencionada debemos correr los siguientes comandos:
+ ```
+cd /home/upm/Desktop/dockers/servidor_Flask
+sudo docker build -t "servidor_flask" .
+  ```
+   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+  ```
+docker run -d --name servidor_flask \
+--network host \
+servidor_flask 
+  ```
 
+## Desplegar el escenario completo usando docker-compose
+
+## Desplegar el escenario completo en Google Cloud/AWS
+
+## Desplegar el escenario completo usando kubernetes
 
   
   
