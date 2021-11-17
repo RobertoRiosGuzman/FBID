@@ -188,12 +188,13 @@ Para el desarrollo de este apartado hemos contenirizado cada uno de los elemento
 ### Zookerper
    
 Se ha cogigo la imagen bitnami/zookeeper, la cual por defecto se expone por el puerto 2181 y habilitamos la opción de registro de cualquier elemento anónimo, en este caso, el contenedor Kafka. Dicho dockerfile se puede ver .
-   Para construir la imagen mencionada debemos correr los siguientes comandos:
+
+Para construir la imagen mencionada debemos correr los siguientes comandos:
  ```
 cd /home/upm/Desktop/dockers/zookeeper
-sudo docker build -t "zookeeper" 
+sudo docker build -t "zookeeper"  .
   ```
-   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+Para arrancar el contenedor, utilizaremos el siguientes comandos:
   ```
 docker run -d --name zookeeper \
 --network host \
@@ -202,9 +203,36 @@ zookeeper
 
 ### Kafka
 
-   Se ha cogido la imagen wurstmeister/kafka, la cual por defeto se expone por el puerto 
+Se ha cogido la imagen wurstmeister/kafka, la cual por defeto se expone por el puerto 9092, conectamos con el servidor de Zookeper  y por ultimos creamos un topic al que le asignamos una partición y una réplica.
+Podemos ver este dockerfile en el siguiente enlace.
 
+Para construir la imagen mencionada debemos correr los siguientes comandos:
+ ```
+cd /home/upm/Desktop/dockers/Kafka
+sudo docker build -t "kafka" . 
+  ```
+   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+  ```
+docker run -d --name kafka \
+--network host \
+kafka
+  ```
+  
 ### Spark
+
+Se ha cogido una imagen de Ubuntu 18.04 a la que se le ha instalado, Java, Python 3.7, Pip, Scala, sbt y Spark. Tras esto se ha copiado el directorio de la práctica y se ha ejecutado el Script de scala MakePredictions.
+
+Para construir la imagen mencionada debemos correr los siguientes comandos:
+ ```
+cd /home/upm/Desktop/dockers/Kafka
+sudo docker build -t "kafka" .
+  ```
+   Para arrancar el contenedor, utilizaremos el siguientes comandos:
+  ```
+docker run -d --name spark \
+--network host \
+spark
+  ```
 
 ### Mongodb
 
