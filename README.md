@@ -311,15 +311,22 @@ Primero, desplegamos minikube:
 ```
 minikube start
   ```
+  
+  ![imagen](https://user-images.githubusercontent.com/85503582/142671577-638be499-7b0a-4f1f-a0e5-375329bbb106.png)
+
 Segundo, creamos el pod multicontenedor que estará definido en el fichero deployement.yaml con un nombre de app y con las seis imagenes construidas en los pasos anteriores. Destacar que permitimos exponer por el puerto 5000 la imagen servidor_flask para que haya conectividad desde el host, es decir, podamos acceder por un navegador al servidor flask.
 ```
 cd /home/upm/Desktop/kubernetes
 sudo kubectl apply -f deployment.yaml --validate=false
 ```
+![imagen](https://user-images.githubusercontent.com/85503582/142671872-cad2d0da-2a57-4d73-87ee-d0368d9b8ac3.png)
+
 Como tercer paso, exponemos este pod en un servicio del nodo minikube. Se indica que hay un enlace NodePort en el puerto 5000 como se ha explicado previamente para permitir la conexión al servidor flask:
 ```
 sudo kubectl expose pod app --type=NodePort --port=5000
 ```
+![imagen](https://user-images.githubusercontent.com/85503582/142672164-779580f2-d65c-4aa7-95a6-090731a951d4.png)
+
 Por último, como se debe realizar en todos los casos, se importan los datos a mongodb: 
 ```
 sudo kubectl exec -ti app -c mongodb /bin/bash
@@ -327,9 +334,14 @@ cd repositorio
 /bin/bash resources/import_distances.sh
 exit
 ```
-Con esto ya se podría utilizar la aplicación accediendo a http://172.17.0.2:5000/flights/delays/predict_kafka
 
-PONER IMAGEN
-  
+Ahora, se puede verificar viendo el pod o el servicio desplegado:
+
+![imagen](https://user-images.githubusercontent.com/85503582/142672299-3480a5ac-298d-40c7-ac66-c2dc22b19fbe.png)
+
+Para acceder se introduce en el navegador http://<Cluster-IP>:5000/flights/delays/predict_kafka
+
+![imagen](https://user-images.githubusercontent.com/85503582/142672702-aec8ba73-2089-498e-8e6d-367a277e5ceb.png)
+
   
   
