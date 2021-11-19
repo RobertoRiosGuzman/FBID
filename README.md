@@ -273,9 +273,12 @@ servidor_flask
 Con estos comandos descritos podríamos acceder ya al navegador y utilizar la aplicación. Para estas validacion no se ha utilizado la opción -d al arrancar cada contenedor para así poder observar más detalles de cada uno. Por tanto, tendremos un terminal con 6 pestañas (una por cada contenedor) y otra para realizar pruebas:
 ![imagen](https://user-images.githubusercontent.com/85503582/142656446-0899cb19-369c-477c-be7c-60c66a973656.png)
 
-En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 6 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a localhost:8080, veremos el master con los dos workers correspondientes creados.
+En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 6 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a http://localhost:8081, veremos el master con los dos workers correspondientes creados.
 
-PONER CAPTURA SERVIDOR FLASK Y MASTER
+![imagen](https://user-images.githubusercontent.com/85503582/142670784-242fa35c-677b-4056-8d11-058403410e3e.png)
+
+![imagen](https://user-images.githubusercontent.com/85503582/142670891-455e3a73-d5d0-4dfa-a8ab-22eced991c8b.png)
+
 ## Desplegar el escenario completo usando docker-compose
 
 Para utilizar docker-compose, nos hemos definido un docker-compose.yml que ejecutará en un servicio las 6 imagenes ya construidas en el apartado anterior (añadiendo la dependencia de zookeeper en kafka). La explicación será la misma que en apartado anterior, destacando que deberemos seguir ejecutando la importación del script dentro del contenedor mongodb. Por ello, deberemos ejecutar:
@@ -313,13 +316,20 @@ Segundo, creamos el pod multicontenedor que estará definido en el fichero deplo
 cd /home/upm/Desktop/kubernetes
 sudo kubectl apply -f deployment.yaml --validate=false
 ```
-Como tercer paso, exponemos este pod en un servicio del nodo minikube. Se indica que hay un enlace NodePort en el puerto 5000:
+Como tercer paso, exponemos este pod en un servicio del nodo minikube. Se indica que hay un enlace NodePort en el puerto 5000 como se ha explicado previamente para permitir la conexión al servidor flask:
 ```
-cd /home/upm/Desktop/kubernetes
 sudo kubectl expose pod app --type=NodePort --port=5000
 ```
+Por último, como se debe realizar en todos los casos, se importan los datos a mongodb: 
+```
+sudo kubectl exec -ti app -c mongodb /bin/bash
+cd repositorio
+/bin/bash resources/import_distances.sh
+exit
+```
+Con esto ya se podría utilizar la aplicación accediendo a http://172.17.0.2:5000/flights/delays/predict_kafka
 
-  
+PONER IMAGEN
   
   
   
