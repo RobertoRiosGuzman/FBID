@@ -308,10 +308,17 @@ Primero, desplegamos minikube:
 ```
 minikube start
   ```
-Segundo
-  
-  
-  
+Segundo, creamos el pod multicontenedor que estará definido en el fichero deployement.yaml con un nombre de app y con las seis imagenes construidas en los pasos anteriores. Destacar que permitimos exponer por el puerto 5000 la imagen servidor_flask para que haya conectividad desde el host, es decir, podamos acceder por un navegador al servidor flask.
+```
+cd /home/upm/Desktop/kubernetes
+sudo kubectl apply -f deployment.yaml --validate=false
+```
+Como tercer paso, exponemos este pod en un servicio del nodo minikube. Se indica que hay un enlace NodePort en el puerto 5000:
+```
+cd /home/upm/Desktop/kubernetes
+sudo kubectl expose pod app --type=NodePort --port=5000
+```
+
   
   
   
