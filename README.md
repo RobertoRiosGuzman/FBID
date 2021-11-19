@@ -273,10 +273,27 @@ servidor_flask
 Con estos comandos descritos podríamos acceder ya al navegador y utilizar la aplicación. Para estas validacion no se ha utilizado la opción -d al arrancar cada contenedor para así poder observar más detalles de cada uno. Por tanto, tendremos un terminal con 6 pestañas (una por cada contenedor) y otra para realizar pruebas:
 ![imagen](https://user-images.githubusercontent.com/85503582/142656446-0899cb19-369c-477c-be7c-60c66a973656.png)
 
+En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 6 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a localhost:8080, veremos el master con los dos workers correspondientes creados.
+
 ## Desplegar el escenario completo usando docker-compose
 
+Para utilizar docker-compose, nos hemos definido un docker-compose.yml que ejecutará en un servicio las 6 imagenes ya construidas en el apartado anterior (añadiendo la dependencia de zookeeper en kafka). La explicación será la misma que en apartado anterior, destacando que deberemos seguir ejecutando la importación del script dentro del contenedor mongodb. Por ello, deberemos ejecutar:
+
+ ```
+cd /home/upm/Desktop/docker-compose
+docker-compose up -d
+docker exec -it mongodb bash
+cd repositorio
+/bin/bash resources/import_distances.sh
+exit
+  ```
+ Las validaciones se realizarán de la misma manera que se han explicado en el apartado anterior de dockers.
+ 
 ## Desplegar el escenario completo en Google Cloud/AWS
 
+En este apartado, utilizando los creditos proporcionados hemos utilizado una instancia de máquina virtual de Google Cloud. Para la realización, hemos traspasado este directorio para utilizar en esta máquina virtual el docker-compose. Para ello es necesario instalar docker y docker-compose y realizar de nuevo la descripción mencionada, construyendo en la máquina con los comandos builds las imagenes y realizando en el directorio donde se haya guardado el docker-compose.yml el comando docker-compose up.
+
+Se podría 
 ## Desplegar el escenario completo usando kubernetes
 
   
