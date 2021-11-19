@@ -12,7 +12,7 @@ A continuación se mostrara una lista con los puntos que se han realizado marcad
 
 ## Lograr el funcionamiento de la práctica sin realizar modificaciones
 
-Primero de todo se ha decidido utilizar el sistema operativo Ubuntu debido a las recomendaciones de los profesores, por lo que se deplego una maquina virtual con este sistema operativo instalado.
+Primero de todo se ha decidido utilizar el sistema operativo Ubuntu 18.04 debido a las recomendaciones de los profesores, por lo que se deplego una maquina virtual con este sistema operativo instalado.
 En dicha máquina virtual, se debe instalar la siguiente lista de programas con sus respectivas versiones:
 
 - Intellij (jdk_1.8)
@@ -187,7 +187,7 @@ Para el desarrollo de este apartado hemos contenirizado cada uno de los elemento
 
 ### Zookerper
    
-Se ha cogigo la imagen bitnami/zookeeper, la cual por defecto se expone por el puerto 2181 y habilitamos la opción de registro de cualquier elemento anónimo, en este caso, el contenedor Kafka. Dicho dockerfile se puede ver .
+Se ha cogido la imagen bitnami/zookeeper, la cual por defecto se expone por el puerto 2181 y habilitamos la opción de registro de cualquier elemento anónimo, en este caso, el contenedor Kafka. Dicho dockerfile se puede ver .
 
 Para construir la imagen mencionada debemos correr los siguientes comandos:
  ```
@@ -220,7 +220,7 @@ kafka
   
 ### Spark
 
-Se ha cogido una imagen de Ubuntu 18.04 a la que se le ha instalado, Java, Python 3.7, Pip, Scala, sbt y Spark. Tras esto se ha copiado el directorio de la práctica y se ha ejecutado el Script de scala MakePredictions.
+Se ha cogido una imagen de Ubuntu 18.04 a la que se le ha instalado, Java, Python 3.7, Pip, Scala, sbt y Spark. Además, se modifica unas variables de entorno de spark para permitir la ejecucción de un master en localhost con dos workers, con un core cada uno de estos workers.Tras esto se ha copiado el directorio de la práctica en el contenedor y se ha ejecutado el script run_streaming.sh que se ha alojado dentro del mencionado directorio. Este script que se iniciará cada vez que arranque el contenedor pondrá en funcionamiento un master, dos workers conectados a este master con url spark://localhost:7077 y realizará el comando spark-submit mencionado previamente añadiendo el argumento --master spark://localhost:7077, el cuál indicará que el programa MakePrediction lo realice este master.
 
 Para construir la imagen mencionada debemos correr los siguientes comandos:
  ```
@@ -235,8 +235,9 @@ spark
   ```
 
 ### Mongodb
+Está imagen tendrá como base un máquina de Ubuntu:14.04 y se realizará dentro de está una copia del directorio de la práctica para permitirnos más tarde importar los datos correspondientes. Por último, cada vez que arranque este contenedor arrancará el servidor de mongodb.
 
-Para construir la imagen mencionada debemos correr los siguientes comandos:
+Para construir la imagen debemos correr los siguientes comandos:
 ```
 cd /home/upm/Desktop/dockers/mongodb
 sudo docker build -t "mongodb" .
@@ -247,8 +248,15 @@ docker run  -d --name mongodb \
 --network host \
 mongodb 
   ```
-
+Esto ejecutará el servidor mongodb, pero será necesario importar las distancias correspondientes desde el contenedor:
+  ```
+docker exec -it mongodb bash
+cd repositorio
+/bin/bash resources/import_distances.sh
+exit
+  ```
 ### Flask
+La imagen utilizada de base será una imagen python:3.7, en la que se modificará la variable de entorno del projecto y se copiará el directorio necesario para arrancar el servidor flask. Además, se instala los requirmentes necesarios y se ejecutar el servidor cada vez que arranque la imagen.
 
 Para construir la imagen mencionada debemos correr los siguientes comandos:
  ```
@@ -261,6 +269,9 @@ docker run -d --name servidor_flask \
 --network host \
 servidor_flask 
   ```
+### Validaciones del entorno utilizando dockers:
+Con estos comandos descritos podríamos acceder ya al navegador y utilizar la aplicación. Para estas validacion no se ha utilizado la opción -d al arrancar cada contenedor para así poder observar más detalles de cada uno. Por tanto, tendremos un terminal con 6 pestañas (una por cada contenedor) y otra para realizar pruebas:
+![imagen](https://user-images.githubusercontent.com/85503582/142656446-0899cb19-369c-477c-be7c-60c66a973656.png)
 
 ## Desplegar el escenario completo usando docker-compose
 
