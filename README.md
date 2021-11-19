@@ -293,7 +293,10 @@ exit
 
 En este apartado, utilizando los creditos proporcionados hemos utilizado una instancia de máquina virtual de Google Cloud. Para la realización, hemos traspasado este directorio para utilizar en esta máquina virtual el docker-compose. Para ello es necesario instalar docker y docker-compose y realizar de nuevo la descripción mencionada, construyendo en la máquina con los comandos builds las imagenes y realizando en el directorio donde se haya guardado el docker-compose.yml el comando docker-compose up.
 
-Se podría 
+Se podría instalar una interfaz gráfica para acceder al navegador, pero bastaría con instalarse alguna herramienta como Lynx y acceder a lynx https://localhost:5000 para realizar una consulta. 
+
+La manera de validarlo es de la misma forma que los apartados anteriores.
+
 ## Desplegar el escenario completo usando kubernetes
 
   
