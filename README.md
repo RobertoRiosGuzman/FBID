@@ -275,6 +275,7 @@ Con estos comandos descritos podríamos acceder ya al navegador y utilizar la ap
 
 En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 6 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a localhost:8080, veremos el master con los dos workers correspondientes creados.
 
+PONER CAPTURA SERVIDOR FLASK Y MASTER
 ## Desplegar el escenario completo usando docker-compose
 
 Para utilizar docker-compose, nos hemos definido un docker-compose.yml que ejecutará en un servicio las 6 imagenes ya construidas en el apartado anterior (añadiendo la dependencia de zookeeper en kafka). La explicación será la misma que en apartado anterior, destacando que deberemos seguir ejecutando la importación del script dentro del contenedor mongodb. Por ello, deberemos ejecutar:
@@ -295,10 +296,19 @@ En este apartado, utilizando los creditos proporcionados hemos utilizado una ins
 
 Se podría instalar una interfaz gráfica para acceder al navegador, pero bastaría con instalarse alguna herramienta como Lynx y acceder a lynx https://localhost:5000 para realizar una consulta. 
 
+CAPTURA DE LYNX Y MONGODB LOS RESULTADOS
+
 La manera de validarlo es de la misma forma que los apartados anteriores.
 
 ## Desplegar el escenario completo usando kubernetes
 
+En este apartado se ha instalado la herramienta minikube y kubectl. Para el despliegue de la arquitectura, se ha tomado la decisión de desplegar un pod de kubernete multicontenedor con todas las imagenes dockers construidas en apartados anteriores. Este pod se ha desplegado en un servicio y a su vez este en el nodo kubernete gratuito de minikube.
+
+Primero, desplegamos minikube:
+```
+minikube start
+  ```
+Segundo
   
   
   
