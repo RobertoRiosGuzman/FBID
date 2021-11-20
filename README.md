@@ -281,7 +281,7 @@ En la ventana de terminal auxiliar podríamos listar todos los contendores con d
 
 ## Desplegar el escenario completo usando docker-compose
 
-Para utilizar docker-compose, nos hemos definido un docker-compose.yml que ejecutará en un servicio las 6 imagenes ya construidas en el apartado anterior (añadiendo la dependencia de zookeeper en kafka). La explicación será la misma que en apartado anterior, destacando que deberemos seguir ejecutando la importación del script dentro del contenedor mongodb. Por ello, deberemos ejecutar:
+Para utilizar docker-compose, nos hemos definido un docker-compose.yml que ejecutará en un servicio las 5 imagenes ya construidas en el apartado anterior (añadiendo la dependencia de zookeeper en kafka). La explicación será la misma que en apartado anterior, destacando que deberemos seguir ejecutando la importación del script dentro del contenedor mongodb. Por ello, deberemos ejecutar:
 
  ```
 cd /home/upm/Desktop/docker-compose
@@ -299,7 +299,7 @@ En este apartado, utilizando los creditos proporcionados hemos utilizado una ins
 
 Se podría instalar una interfaz gráfica para acceder al navegador, pero bastaría con instalarse alguna herramienta como Lynx y acceder a lynx http://localhost:5000/flights/delays/predict_kafka para realizar una consulta. 
 
-Podemos observar funcionando los 6 contenedores:
+Podemos observar funcionando los 5 contenedores:
 
 ![Captura](https://user-images.githubusercontent.com/85503582/142737632-4da6fea1-143a-4df3-bc83-787b97f00517.JPG)
 
