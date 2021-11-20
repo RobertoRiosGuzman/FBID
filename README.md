@@ -273,7 +273,7 @@ servidor_flask
 Con estos comandos descritos podríamos acceder ya al navegador y utilizar la aplicación. Para estas validacion no se ha utilizado la opción -d al arrancar cada contenedor para así poder observar más detalles de cada uno. Por tanto, tendremos un terminal con 6 pestañas (una por cada contenedor) y otra para realizar pruebas:
 ![imagen](https://user-images.githubusercontent.com/85503582/142656446-0899cb19-369c-477c-be7c-60c66a973656.png)
 
-En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 6 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a http://localhost:8081, veremos el master con los dos workers correspondientes creados.
+En la ventana de terminal auxiliar podríamos listar todos los contendores con docker ps, observando los 5 correspondientes. Además, con el comando docker exec -it <nombre_contenedor> bash, podríamos realizar las pruebas expuestas en el primer apartado. Por último, podremos acceder al navegador con la url mostrada por el contenedor con el sevidor flask para utilizar dicha aplicación. Como detalle destacar que accediendo a http://localhost:8081, veremos el master con los dos workers correspondientes creados.
 
 ![imagen](https://user-images.githubusercontent.com/85503582/142670784-242fa35c-677b-4056-8d11-058403410e3e.png)
 
