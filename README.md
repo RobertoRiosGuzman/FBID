@@ -297,9 +297,34 @@ exit
 
 En este apartado, utilizando los creditos proporcionados hemos utilizado una instancia de máquina virtual de Google Cloud. Para la realización, hemos traspasado este directorio para utilizar en esta máquina virtual el docker-compose. Para ello es necesario instalar docker y docker-compose y realizar de nuevo la descripción mencionada, construyendo en la máquina con los comandos builds las imagenes y realizando en el directorio donde se haya guardado el docker-compose.yml el comando docker-compose up.
 
-Se podría instalar una interfaz gráfica para acceder al navegador, pero bastaría con instalarse alguna herramienta como Lynx y acceder a lynx https://localhost:5000 para realizar una consulta. 
+Se podría instalar una interfaz gráfica para acceder al navegador, pero bastaría con instalarse alguna herramienta como Lynx y acceder a lynx http://localhost:5000/flights/delays/predict_kafka para realizar una consulta. 
 
-CAPTURA DE LYNX Y MONGODB LOS RESULTADOS
+Podemos observar funcionando los 6 contenedores:
+
+![Captura](https://user-images.githubusercontent.com/85503582/142737632-4da6fea1-143a-4df3-bc83-787b97f00517.JPG)
+
+Ejecutamos lynx:
+  ```
+http://localhost:5000/flights/delays/predict_kafka
+  ```
+  
+  ![Captura JPG1](https://user-images.githubusercontent.com/85503582/142737640-a777fe7c-90cd-47d0-a944-c7c4ab9b47ab.JPG)
+
+Si aceptamos nos da una respuesta positiva:
+
+![Captura JPG2](https://user-images.githubusercontent.com/85503582/142737662-ab6e871d-446f-4f86-a102-d9610c8ea187.JPG)
+
+Si realizamos la comprobación dentro de mongodb, podremos ver la consulta:
+
+  ```
+sudo docker exec -it mongodb bash
+mongo
+use agile_data_science;
+db.flight_delay_classification_response.find();
+  ```
+
+![Captura JPG3](https://user-images.githubusercontent.com/85503582/142737712-6f14a0a0-93c2-41f3-a882-4048fc3a26b2.JPG)
+
 
 La manera de validarlo es de la misma forma que los apartados anteriores.
 
