@@ -1,0 +1,27 @@
+services:
+
+    "zookeeper":
+        container_name: zookeeper
+        image: zookeeper
+        network_mode: host
+    "kafka":
+        container_name: kafka
+        image: kafka
+        network_mode: host
+        depends_on:
+            - zookeeper
+
+    "spark":
+        container_name: spark
+        image: spark
+        network_mode: host
+
+    "mongodb":
+        container_name: mongodb
+        image: mongodb
+        network_mode: host
+
+    "servidor_flask":
+        container_name: servidor_flask
+        image: servidor_flask
+        network_mode: host

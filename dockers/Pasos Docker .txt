@@ -1,0 +1,41 @@
+docker rm zookeeper
+docker rm kafka
+docker rm spark
+docker rm mongodb
+docker rm servidor_flask
+docker image rm zookeeper
+docker image rm kafka
+docker image rm spark
+docker image rm mongodb
+docker image rm servidor_flask
+cd /home/upm/Desktop/dockers/zookeeper
+sudo docker build -t "zookeeper" .
+cd /home/upm/Desktop/dockers/Kafka
+sudo docker build -t "kafka" .
+cd /home/upm/Desktop/dockers/Ubuntu18.04_Spark
+sudo docker build -t "spark" .
+cd /home/upm/Desktop/dockers/mongodb
+sudo docker build -t "mongodb" .
+cd /home/upm/Desktop/dockers/servidor_Flask
+sudo docker build -t "servidor_flask" .
+
+docker run -d --name zookeeper \
+--network host \
+zookeeper
+docker run -d --name kafka \
+--network host \
+kafka
+docker run -d --name spark \
+--network host \
+spark
+docker run  -d --name mongodb \
+--network host \
+mongodb 
+docker run -d --name servidor_flask \
+--network host \
+servidor_flask 
+docker exec -it mongodb bash
+cd repositorio
+/bin/bash resources/import_distances.sh
+exit
+
