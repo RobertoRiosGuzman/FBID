@@ -378,7 +378,7 @@ Ahora, se puede verificar viendo el pod o el servicio desplegado:
 
 ![imagen](https://user-images.githubusercontent.com/85503582/142672299-3480a5ac-298d-40c7-ac66-c2dc22b19fbe.png)
 
-Para acceder se introduce en el navegador http://<Cluster-IP>:5000/flights/delays/predict_kafka
+Para acceder se introduce en el navegador http://<'Cluster-IP'>:5000/flights/delays/predict_kafka
 
 ![imagen](https://user-images.githubusercontent.com/85503582/142672702-aec8ba73-2089-498e-8e6d-367a277e5ceb.png)
 
