@@ -185,7 +185,7 @@ Finalmente deberemos correr el siguiente comando en el que se incluyen los 2 paq
   
 Para el desarrollo de este apartado hemos contenirizado cada uno de los elementos necesarios para el funcionamiento de la práctica, creando un DockerFile par cada uno de ellos:
 
-### Zookerper
+### Zookeeper
    
 Se ha cogido la imagen bitnami/zookeeper, la cual por defecto se expone por el puerto 2181 y habilitamos la opción de registro de cualquier elemento anónimo, en este caso, el contenedor Kafka. Dicho dockerfile se puede ver .
 
@@ -296,6 +296,9 @@ docker exec -it mongodb bash
 cd repositorio
 /bin/bash resources/import_distances.sh
 exit
+docker exec -it spark bash
+./run_streaming.sh
+exit
   ```
  Las validaciones se realizarán de la misma manera que se han explicado en el apartado anterior de dockers.
  
@@ -358,11 +361,16 @@ sudo kubectl expose pod app --type=NodePort --port=5000
 ```
 ![imagen](https://user-images.githubusercontent.com/85503582/142672164-779580f2-d65c-4aa7-95a6-090731a951d4.png)
 
-Por último, como se debe realizar en todos los casos, se importan los datos a mongodb: 
+Por último, como se debe realizar en todos los casos, se importan los datos a mongodb y se ejecutan el script del spark: 
 ```
 sudo kubectl exec -ti app -c mongodb /bin/bash
 cd repositorio
 /bin/bash resources/import_distances.sh
+exit
+```
+```
+sudo kubectl exec -ti app -c spark /bin/bash
+./run_streaming.sh
 exit
 ```
 
