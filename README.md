@@ -220,12 +220,12 @@ kafka
   
 ### Spark
 
-Se ha cogido una imagen de Ubuntu 18.04 a la que se le ha instalado, Java, Python 3.7, Pip, Scala, sbt y Spark. Además, se modifica unas variables de entorno de spark para permitir la ejecucción de un master en localhost con dos workers, con un core cada uno de estos workers.Tras esto se ha copiado el directorio de la práctica en el contenedor y se ha ejecutado el script run_streaming.sh que se ha alojado dentro del mencionado directorio. Este script que se iniciará cada vez que arranque el contenedor pondrá en funcionamiento un master, dos workers conectados a este master con url spark://localhost:7077 y realizará el comando spark-submit mencionado previamente añadiendo el argumento --master spark://localhost:7077, el cuál indicará que el programa MakePrediction lo realice este master.
+Se ha cogido una imagen de Ubuntu 18.04 a la que se le ha instalado, Java, Python 3.7, Pip, Scala, sbt y Spark. Además, se modifica unas variables de entorno de spark para permitir la ejecucción de un master en localhost con dos workers, con un core cada uno de estos workers.Tras esto se ha copiado el directorio de la práctica en el contenedor y se ha ejecutado el script run_streaming.sh que se ha alojado dentro del mencionado directorio. Este script que se iniciará cada vez que arranque el contenedor pondrá en funcionamiento un master, dos workers conectados a este master con url spark://localhost:7077 y realizará el comando spark-submit mencionado previamente añadiendo el argumento --master spark://localhost:7077 y otros parámetros de configuración, el cuál indicará que el programa MakePrediction lo realicen estos trabajadores.
 
 Para construir la imagen mencionada debemos correr los siguientes comandos:
  ```
-cd /home/upm/Desktop/dockers/Kafka
-sudo docker build -t "kafka" .
+cd /home/upm/Desktop/dockers/Ubuntu18.04_Spark
+sudo docker build -t "spark" .
   ```
    Para arrancar el contenedor, utilizaremos el siguientes comandos:
   ```
@@ -233,6 +233,12 @@ docker run -d --name spark \
 --network host \
 spark
   ```
+```
+docker exec -it spark bash
+./run_streaming.sh
+exit
+  ```
+ 
 
 ### Mongodb
 Está imagen tendrá como base un máquina de Ubuntu:14.04 y se realizará dentro de está una copia del directorio de la práctica para permitirnos más tarde importar los datos correspondientes. Por último, cada vez que arranque este contenedor arrancará el servidor de mongodb.
